@@ -103,7 +103,7 @@ class Panel implements IBarPanel
         foreach ($queries as $query) {
             if (is_callable($this->highlighter)) {
                 $query = preg_replace('#(<b style=\"color:green\">)|(</b>)#', '', $query);
-                $html .= '<tr><td>' . $this->highlighter($query) . '</td></tr>';
+                $html .= '<tr><td>' . call_user_func($this->highlighter, $query) . '</td></tr>';
             } else {
                 $html .= '<tr><td>' . $query . '</td></tr>';
             }
