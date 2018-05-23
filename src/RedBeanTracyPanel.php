@@ -61,7 +61,7 @@ class Panel implements IBarPanel
             if (substr($value, 0, 9) == 'resultset') {
                 unset($output[$key]);
             } else {
-                if (self::$showKeepCache) {
+                if ($this->showKeepCache) {
                     $queries[] = $value;
                 } else {
                     $queries[] = str_replace('-- keep-cache', '', $value);
@@ -98,9 +98,8 @@ class Panel implements IBarPanel
     public function getPanel()
         {
         $queries = $this->queries;
-        $html = '<h1>' . self::$title . '</h1>';
+        $html = '<h1>' . $this->title . '</h1>';
         $html .= '<div class="tracy-inner tracy-InfoPanel"><table width="300">';
-        SqlFormatter::$pre_attributes = 'style="color: black;"';
         foreach ($queries as $query) {
             if (is_callable($this->highlighter)) {
                 $query = preg_replace('#(<b style=\"color:green\">)|(</b>)#', '', $query);
